@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.ucsc.account_service.Models.Customer;
 import org.ucsc.account_service.Repositories.CustomerRepository;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
     private final CustomerRepository customerRepository;
@@ -39,5 +41,50 @@ public class CustomerService {
         }
         customerRepository.save(customer);
         return "Customer added successfully";
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    public Customer getCustomer(String id) {
+        return customerRepository.findById(id).orElse(null);
+    }
+
+    public String updateCustomer(Customer customer) {
+        Customer existingCustomer = customerRepository.findById(customer.getId()).orElse(null);
+        if(existingCustomer == null) {
+            return "Customer not found";
+        }
+
+        if(customer.getName() != null) {
+            existingCustomer.setName(customer.getName());
+        }
+        if(customer.getNic() != null) {
+            existingCustomer.setNic(customer.getNic());
+        }
+        if(customer.getEmail() != null) {
+            existingCustomer.setEmail(customer.getEmail());
+        }
+        if(customer.getAddress() != null) {
+            existingCustomer.setAddress(customer.getAddress());
+        }
+        if(customer.getUserId() != null) {
+            existingCustomer.setUserId(customer.getUserId());
+        }
+        if(customer.getDob() != null) {
+            existingCustomer.setDob(customer.getDob());
+        }
+        customerRepository.save(existingCustomer);
+        return "Customer updated successfully";
+    }
+
+    public String deleteCustomer(String id) {
+        Customer existingCustomer = customerRepository.findById(id).orElse(null);
+        if(existingCustomer == null) {
+            return "Customer not found";
+        }
+        customerRepository.deleteById(id);
+        return "Customer deleted successfully";
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import org.ucsc.account_service.Models.Customer;
 import org.ucsc.account_service.Services.CustomerService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping(path = "api/Account_Service/customer")
@@ -14,5 +16,25 @@ public class CustomerController {
     @PostMapping("/add")
     public String addCustomer(@RequestBody Customer customer) {
         return customerService.addCustomer(customer);
+    }
+
+    @GetMapping("/allCustomers")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
+    @GetMapping("/customer/{id}")
+    public Customer getCustomer(@PathVariable String id) {
+        return customerService.getCustomer(id);
+    }
+
+    @PutMapping("/update")
+    public String updateCustomer(@RequestBody Customer customer) {
+        return customerService.updateCustomer(customer);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteCustomer(@PathVariable String id) {
+        return customerService.deleteCustomer(id);
     }
 }
