@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "AccountEvent",
+  "namespace": "com.sritel.account.event",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "phoneNo",
+      "type": "string"
+    },
+    {
+      "name": "createdDate",
+      "type": "string"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path = "api/Account_Service/account")
+@RequestMapping(path = "api/v1/account")
 @AllArgsConstructor
 public class AccountController {
     private final AccountService accountService;
@@ -39,11 +39,15 @@ public class AccountController {
         return accountService.deleteAccount(id);
     }
 
-    @GetMapping("/account_list/{id}")
-    public List<Account> getAccountList(@PathVariable String id) {
-        return accountService.getAccountList(id);
+    @GetMapping("/account_list/{email}")
+    public List<Account> getAccountList(@PathVariable String email) {
+        return accountService.getAccountList(email);
     }
 
+    @GetMapping("/exists/{phoneNo}")
+    public boolean isAccountExists(@PathVariable String phoneNo) {
+        return accountService.isAccountExists(phoneNo);
+    }
 
 
 }

@@ -10,5 +10,7 @@ import java.util.List;
 public interface AccountRepository extends MongoRepository<Account, String> {
     Account findByPhoneNo(String phoneNo);
 
-    List<Account> findByCustomerId(String customerId);
+    List<Account> findByEmail(String customerId);
+
+    boolean existsByPhoneNo(String phoneNo);
 }
